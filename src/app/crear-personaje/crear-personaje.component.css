@@ -1,0 +1,417 @@
+
+div.box{
+    margin-top: 10px;
+}
+
+label{
+    text-transform: uppercase;
+    font-size: 12px;
+    
+}
+
+textarea{
+    font-size: 12px;
+    text-align: left;
+    width: calc(100% - 10px*2- 2px);
+    border-radius: 10px;
+    padding: 10px;
+    resize: none;
+    overflow: hidden;
+    height: 15em;
+}
+
+
+form.hojaPersonaje{
+    width: 800px;
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20%;
+    background: url(https://startplaying.games/_next/image?url=https%3A%2F%2Fspg-images.s3.us-west-1.amazonaws.com%2Ff08525ee-cec5-4644-bff2-d0c58f993bf9&w=3840&q=75);
+    
+    border: 15px dotted rgb(242, 237, 237);
+    border-radius: 15px;
+    /*opacity: .9;*/
+}
+
+form.hojaPersonaje div.textblock{
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+    align-items: center;
+}
+
+form.hojaPersonaje label{
+    text-align: center;
+    border: 1px solid rgb(249, 246, 246);
+    border-top: 0;
+    font-size: 10px;
+    width: calc(100% - 10px*2 - 2px);
+    border-radius: 0 0 10px 10px;
+    padding: 4px 0;
+    font-weight: bold;
+}
+
+form.hojaPersonaje ul{
+    margin: 0;
+    padding: 0;
+}
+
+form.hojaPersonaje li{
+    list-style-image: none;
+    display: block;
+}
+
+form.hojaPersonaje label{
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+header{
+    display: flex;
+    align-content: stretch;
+    align-items: stretch;
+}
+
+header section.nombrePersonaje{
+    border: 1px solid rgb(233, 228, 228);
+
+    border-radius: 10px 10px 10px 10px;
+    padding: 5px 0;
+    background-color: rgb(133, 156, 227);
+    width: 30%;
+    display: flex;
+    flex-direction: column-reverse;
+    bottom: 0;
+    top: 0;
+    margin-top: 1%;
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-bottom: 1%;
+}
+
+header section.nombrePersonaje input{
+    padding: 0.5em;
+    margin: 5px;
+    border: 0;
+    border-radius: 5px;
+}
+
+section.nombrePersonaje label{
+    padding-left: 1em;
+    border: none;
+}
+
+section.miscelanea{
+    width: 60%;
+    border: 1px solid rgb(94, 55, 162);
+    border-radius: 10px;
+    padding-left: 1em;
+    padding-right: 1em;
+    margin-top: 5px;
+}
+
+section.miscelanea ul{
+    padding: 10px 0px 5px 0px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+section.miscelanea li{
+    width: 33.33333%;
+          display: flex;
+          flex-direction: column-reverse;
+}
+
+section.miscelanea li label{
+    margin-bottom: 5px;
+}
+
+section.miscelanea li input{
+    border: 0;
+    border-bottom: 1px solid rgb(171, 35, 35);
+}
+
+main{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10*2;
+}
+
+main div.contenedorCompetencia{
+    position: relative;
+    width: 100%;
+    height: 30px - 10px - 2px;
+    margin-top: 10px / 2 + 1px;
+    border: 1px solid rgb(246, 244, 244);
+    text-align: center;
+}
+main div.contenedorCompetencia>label{
+    position: absolute;
+    left: 0;
+    top: 1px;
+    transform: translate(0%, 50%);
+    width: 100%;
+    font-size: 8px;
+}
+
+main div.contenedorCompetencia >section{
+    width: 32%;
+    display: flex;
+    flex-direction: column;
+}
+
+  section.atributos{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+section.atributos div.puntuaciones{
+  
+    border-radius: 15px;
+    padding-bottom: 10px / 2;
+    margin-left: 1%;
+    margin-bottom: 5%;
+}
+
+ div.puntuaciones label{
+    font-size: 10px;
+    font-weight: bold;
+}
+
+div.puntuaciones ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+}
+
+div.puntuaciones ul li{
+    height: 80px;
+    width: 70px;
+    background-color: rgb(153, 201, 201);
+    border: 1px solid rgb(234, 230, 230);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+   
+}
+
+div.puntuaciones ul li input{
+    width: 100%;
+    padding: 0;
+    border: 0;
+}
+div.puntuacion label{
+    border: 0;
+    font-size: 9px;
+}
+div.puntuacion input{
+    text-align: center;
+    font-size: 30px;
+    padding: 2px 0px 0px 0px;
+    background: whitesmoke;
+    
+}
+
+div.modificador{
+    margin-top: 3px;
+    
+}
+
+div.modificador input{
+    background: whitesmoke;
+    border: 1px inset rgb(227, 224, 224);
+    text-align: center;
+    
+}
+
+div.seccionLista{
+    border: 1px solid rgb(246, 243, 243);
+    border-radius: 10px;
+    padding: 10px 10px/2;
+    margin-left: 10%;
+}
+
+div.seccionLista div.label{
+    margin-top: 10px;
+    margin-bottom: 10px / 4;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+div.seccionLista ul li{
+    display: flex;
+    align-items: center;
+    
+}
+
+div.seccionLista ul li label{
+    text-transform: none;
+    font-size: 8px;
+    text-align: left;
+    order: 3;
+    border: 0;
+}
+
+div.seccionLista ul li label span.habilidad{
+    color: rgb(181, 17, 17);
+}
+
+div.seccionLista ul li input[type=text]{
+    width: 30px;
+    font-size: 12px;
+    text-align: center;
+    border: 0;
+    border-bottom: 1px solid black;
+    order: 2;
+}
+
+div.seccionLista ul li input[type=checkbox]{
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    order: 1;
+}
+
+div.seccionLista ul li input:checked{
+    background-color: black;
+}
+ 
+section.combate{
+    background-image:url(https://images.ctfassets.net/swt2dsco9mfe/4Dkulb3CgE4D7V3yJid7tP/1a8f93f5df165d60f8233f78d7ab9220/product-hero-starterset.jpg?q=70&w=1920);
+    background-size: cover;
+    opacity: .9;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+section.combate> div{
+    overflow: hidden;
+}
+
+section.combate div.valorCompetencia,div.iniciativa, div.velocidad{
+    flex-basis: 33.333%;
+}
+
+section.combate div.valorCompetencia div, div.iniciativa div, div.velocidad div{
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    margin-top: 10px;
+}
+
+
+section.combate div.valorCompetencia label, div.iniciativa label,div.velocidad label{
+    font-size: 10px;
+    width: 70px - 10px*2;
+    border: 1px solid black;
+    border-top: 0;
+    background-color: blanchedalmond;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 0 0 10px 10px;
+}
+
+section.combate div.valorCompetencia input, div.iniciativa input,div.velocidad input{
+    height: 70px;
+    width: 70px;
+    border-radius: 10px;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 30px;
+}
+
+section.combate div.pg{
+    flex-basis: 50%;
+    margin-left: 25%;
+    margin-top: 2%;
+}
+
+section.combate div.pg div.puntosGolpe{
+    background-color: rgba(135, 152, 215, 0.756);
+    border: 1px solid rgb(186, 181, 181);
+    margin: 10px;
+    margin-bottom: 10px / 2;
+    border-radius: 10px 10px 0 0;
+}
+
+section.combate div.pg div.puntosGolpe div.max{
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+}
+
+section.combate div.pg div.puntosGolpe label,div.max label{
+    font-size: 12px;
+    text-transform: none;
+    color: rgb(11, 11, 11);
+    border: 0;
+}
+section.combate div.puntosGolpe input, div.max input{
+    width: 40%;
+    border: 0;
+    border-bottom: 1px solid rgb(179, 21, 21);
+    font-size: 12px;
+    text-align: center;
+}
+
+section.combate div.puntosGolpe div.puntosGolpeActuales{
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+section.combate div.puntosGolpe input, div.puntosGolpeActuales input{
+    border: 0;
+    width: 100%;
+    padding: 1em 0;
+    font-size: 20px;
+    text-align: center;
+}
+
+section.combate div.puntosGolpe label, div.puntosGolpeActuales label{
+    font-size: 10px;
+    padding-bottom: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+section.combate div.dadoGolpe{
+    margin: 10px;
+    margin-top: 0;
+    border: 1px solid black;
+    border-radius: 0 0 10px 10px;
+    display: flex;
+    flex-direction: column-reverse;
+    background-color: green;
+}
+
+section.combate div.dadoGolpe input{
+    padding: 1em 0;
+    font-size: 20px;
+    border: 0;
+    text-align: center;
+}
+
+section.combate div.dadoGolpe label{
+    font-size: 10px;
+    padding-bottom: 5px;
+    text-align: center;
+    font-weight: bold;
+    border: 0;
+}
+
+

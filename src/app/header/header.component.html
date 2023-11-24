@@ -1,0 +1,31 @@
+<link rel="stylesheet" type="text/css" href="/src/app/header/header.component.css"  media="screen" /> 
+<header>
+    <a href="" class="logo"><img src="https://cdn-icons-png.flaticon.com/512/6545/6545894.png" height="25px"><span>DnD Below</span></a>
+
+    <ul class="barraNavegacion">
+        <li><a href="datos-clase">Clases</a></li>
+        <li><a href="">Subclases</a></li>
+        <li><a href="">Razas</a></li>
+        <li><a href="datos-hechizo">Hechizos</a></li>
+    </ul>
+
+    <div class="RegistroLogin" *ngIf="usuario == ''">
+        <form [formGroup]="form" class="formularioLogin">
+        <div class="textBoxes">
+        <input class="caja" name="usuario" type="text" placeholder="Usuario" formControlName="usuario">
+        <input class="caja" name="password" type="password" placeholder="Password" formControlName="password">
+         
+         <div class="login">
+        <button class="botonLogin" type="submit" (click)="clickLogin()">Login</button>
+        </div>
+    </div>
+    </form>
+        <a href="crear-usuario" class="usuario">Registrarse</a>
+    </div>  
+
+    <div *ngIf="usuario != ''">
+        <!-- Mostrar información para usuarios autenticados  (click)="logout()"-->
+        <p>Bienvenido, {{usuario}}</p>
+        <button >Logout</button>
+    </div>
+</header>

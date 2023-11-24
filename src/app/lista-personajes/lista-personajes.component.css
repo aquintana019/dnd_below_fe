@@ -1,0 +1,51 @@
+
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+   
+}
+
+.carta{
+    width: 500px;
+    height: 250px;
+    display: flex;
+    overflow: hidden;
+    background-color: aliceblue;
+    box-shadow: 0 5px 10px teal;
+    border-radius: 10px;
+}
+
+.carta .imagenCarta{
+    background: url(https://s3-eu-west-2.amazonaws.com/dungeon20/images/496960/medium-c4ddda9617004a5379c8dc52a56852920788553c.jpg?1641561991);
+    width: 40%;
+    height: 100%;
+    background-size: cover;
+}
+
+.carta .contenido{
+    width: 60%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 50px;
+    padding: 10px 15px;
+}
+
+.carta .contenido .titulo{
+    color:black
+}
+
+a{
+    text-decoration: none;
+}
+
+.carta .contenido .boton button{
+    background-color: red;
+    padding:  5px 10px;
+    border-radius: 5px;
+    outline: none;
+  
+}
+

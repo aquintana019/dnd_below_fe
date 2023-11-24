@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/src/app/datos-hechizo/datos-hechizo.component.css"  media="screen" /> 
+
+    <title>Datos hechizo</title>
+</head>
+<body>
+    <div *ngIf="error">
+        <p>Error: {{error}}</p>
+    </div>
+
+    <div class="contenedorHechizos" *ngIf="hechizos">
+        <ul>
+            <li *ngFor="let hechizo of hechizos">
+                <h6>{{hechizo.nombre}}</h6>
+
+            </li>
+        </ul>
+
+    </div>
+    
+</body>
+</html>

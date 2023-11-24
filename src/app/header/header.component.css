@@ -1,0 +1,114 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-decoration: none;
+    list-style: none;
+}
+
+header{
+    position: fixed;
+    width: 100%;
+    top:0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-image: url(https://exn6yww6zqg.exactdn.com/wp-content/uploads/2019/08/fortress_by_malverro_dcskn4j.jpg?strip=all&lossy=1&w=2560&ssl=1);
+   background-size: cover;
+    padding: 0.5% 5%;
+   
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    margin-left: -5%;
+
+}
+
+.logo span{
+    font-size: larger;
+    font-weight: bolder;
+    margin-left: 3px;
+}
+
+.barraNavegacion{
+    display: flex;
+}
+
+.barraNavegacion a{
+    padding: 10px 0;
+    margin: 0px 10px;
+}
+
+ a:hover{
+    color:red;
+}
+
+.caja{
+    outline: none;
+    border: 1px solid olive;
+    border-radius: 10px;
+    margin: 10px 5px;
+    padding: 5px;
+}
+
+.RegistroLogin{
+    display: flex;
+    align-items: center;
+}
+
+.textBoxes {
+    display: flex;
+    align-items: baseline;
+}
+
+
+.textBoxes :hover{
+    border: 1.2px solid #0075ff;
+    box-shadow: 0 7px 7px 0 #1f212348;
+}
+
+.RegistroLogin a{
+    margin-right: 10px;
+    margin-left: 30px;
+}
+
+.botonLogin{
+    width: 50px;
+    height: 30px;
+    background: white;
+    border: 1px solid olive;
+    border-radius: 10px;
+    outline: none;
+    margin: 10px 5px;
+}
+
+
+.login :hover{
+    background: rgb(207, 236, 207);
+    border: 1.2px solid olive;
+    color: rgb(164, 59, 59);
+    font-weight: bold;
+    box-shadow: 0 7px 7px 0 #1f212348;
+
+}
+
+@media (max-width: 700px){
+    .barraNavegacion{
+        position: absolute;
+        top: 100%;
+        right: 5%;
+        width: 200px;
+        height: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        border-radius: 10px;
+        transition: all .50 ease;
+    }
+
+}
