@@ -1,51 +1,96 @@
-
-
-body{
+body {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-   
-}
+    height: 100vh;
+    margin: 0;
+  }
 
-.carta{
-    width: 500px;
-    height: 250px;
-    display: flex;
-    overflow: hidden;
-    background-color: aliceblue;
-    box-shadow: 0 5px 10px teal;
-    border-radius: 10px;
-}
-
-.carta .imagenCarta{
-    background: url(https://s3-eu-west-2.amazonaws.com/dungeon20/images/496960/medium-c4ddda9617004a5379c8dc52a56852920788553c.jpg?1641561991);
-    width: 40%;
-    height: 100%;
-    background-size: cover;
-}
-
-.carta .contenido{
-    width: 60%;
-    height: 100%;
-    display: grid;
-    grid-template-rows: 50px;
-    padding: 10px 15px;
-}
-
-.carta .contenido .titulo{
-    color:black
-}
-
-a{
+  .boton-crear {
+    background-image: url(https://img.freepik.com/premium-photo/old-vintage-paper-texture-background_293060-5242.jpg);
+    border: none;
+    margin-bottom: 10px; 
+    padding: 10px 16px;
+    text-align: center;
     text-decoration: none;
-}
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bolder;
+    cursor: pointer;
+    position: relative;
+    width: 50%;
+    z-index: 1; 
+    border-radius: 10px;
+  }
 
-.carta .contenido .boton button{
-    background-color: red;
-    padding:  5px 10px;
-    border-radius: 5px;
-    outline: none;
+  #contenedor::-webkit-scrollbar {
+    width: 12px; 
+  }
   
-}
+  #contenedor::-webkit-scrollbar-track {
+    background-color: #bbdcef; 
+  }
+  
+  #contenedor::-webkit-scrollbar-thumb {
+    background-color: #c79b77; 
+    border-radius: 6px; 
+  }
+  
+  #contenedor::-webkit-scrollbar-thumb:hover {
+    background-color: #353434;
+  }
 
+  #contenedor {
+    position: relative;
+    width: 800px;
+    height: 400px;
+    overflow: auto;
+    background-color: #bbdcef;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 0; 
+  }
+
+  .lista-personajes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .tarjeta {
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+    background-image: url(https://img.freepik.com/premium-photo/old-vintage-paper-texture-background_293060-5242.jpg);
+    background-repeat: round;
+   
+  }
+
+  .imagen {
+    width: 150px;
+    height: 150px;
+    margin-top: 15px;
+    margin-left: 10px;
+    border-radius: 50%;
+    margin-right: 20px; 
+    margin-bottom: 10px;
+    object-fit: cover;
+  }
+
+  .contenido {
+    padding: 10px;
+  }
+
+  .boton {
+    background-color: burlywood;
+    color: #ffffff;
+    border: none;
+    margin-top: 10%;
+    margin-right: 10px; 
+    padding: 10px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+  }

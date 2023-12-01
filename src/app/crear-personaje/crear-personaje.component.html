@@ -1,219 +1,768 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/src/app/crear-personaje/crear-personaje.component.css"  media="screen" /> 
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/src/app/crear-personaje/crear-personaje.component.css"
+      media="screen"
+    />
     <title>Crear personaje</title>
-</head>
-<body>
-    <form class="hojaPersonaje">
-        <header>
-          <section class="nombrePersonaje">
-            <label for="nombrePersonaje">Nombre personaje</label>
-            <input name="nombrePersonaje" />
-          </section>
-          <section class="miscelanea">
-            <ul>
-              <li>
-                <label for="clase">Clase</label><input name="clase" placeholder="Clase" />
-              </li>
-              <li>
-                <label for="trasfondo">Trasfondo</label><input name="trasfondo" placeholder="Trasfondo" />
-              </li>
-              <li>
-                <label for="nivel">Nivel</label><input name="nivel" placeholder="1">
-              </li>
-              <li>
-                <label for="raza">Raza</label><input name="raza" placeholder="Raza" />
-              </li>
-              <li>
-                <label for="alineamiento">alineamiento</label><input name="alineamiento" placeholder="Alineamiento" />
-              </li>
-              <li>
-                <label for="experiencia">Experiencia</label><input name="experiencia" placeholder="0" />
-              </li>
-            </ul>
-          </section>
-        </header>
-        <main>
-          <section>
-            <section class="atributos">
-              <div class="puntuaciones">
+  </head>
+  <body>
+    <form
+      #miFormulario="ngForm"
+      class="hojaPersonaje"
+      id="formularioPersonaje"
+      ngNativeValidate
+    >
+      <header>
+        <section class="nombrePersonaje">
+          <label for="nombrePersonaje">Nombre personaje</label>
+          <input
+            name="nombrePersonaje"
+            [(ngModel)]="nombre"
+            [readonly]="formularioBloqueado"
+          />
+        </section>
+        <section class="miscelanea">
+          <ul>
+            <li>
+              <label for="clase">Clase</label>
+              <select
+                name="clase"
+                [(ngModel)]="claseSeleccionada"
+                (change)="actualizarDadoGolpe()"
+                [disabled]="formularioBloqueado"
+              >
+                <option value="" disabled selected>Selecciona una clase</option>
+                <option
+                  *ngFor="let clase of clases"
+                  value="{{ clase.nombreClase }}"
+                >
+                  {{ clase.nombreClase }}
+                </option>
+              </select>
+            </li>
+            <li>
+              <label for="trasfondo">Trasfondo</label
+              ><input
+                name="trasfondo"
+                [(ngModel)]="trasfondo"
+                placeholder="Trasfondo"
+                [readonly]="formularioBloqueado"
+              />
+            </li>
+            <li>
+              <label for="nivel">Nivel</label>
+              <input
+                name="nivel"
+                [(ngModel)]="nivel"
+                (input)="actualizarCompetencia()"
+                (input)="guardarModificadorHabilidad()"
+                [readonly]="formularioBloqueado"
+              />
+            </li>
+            <li>
+              <label for="raza">Raza</label
+              ><input
+                name="raza"
+                [(ngModel)]="raza"
+                placeholder="Raza"
+                [readonly]="formularioBloqueado"
+              />
+            </li>
+            <li>
+              <label for="alineamiento">alineamiento</label
+              ><input
+                name="alineamiento"
+                [(ngModel)]="alineamiento"
+                placeholder="Alineamiento"
+                [readonly]="formularioBloqueado"
+              />
+            </li>
+            <li>
+              <label for="experiencia">Experiencia</label
+              ><input
+                name="experiencia"
+                [(ngModel)]="experiencia"
+                placeholder="0"
+                [readonly]="formularioBloqueado"
+              />
+            </li>
+          </ul>
+        </section>
+      </header>
+      <main>
+        <section>
+          <section class="atributos">
+            <div class="puntuaciones">
+              <ul>
+                <li>
+                  <div class="puntuacion">
+                    <label for="puntuacionFuerza">Fuerza</label>
+                    <input
+                      name="puntuacionFuerza"
+                      placeholder="0"
+                      (input)="actualizarModificadores()"
+                      (input)="guardarModificadorHabilidad()"
+                      [(ngModel)]="puntuacionFuerza"
+                      [readonly]="formularioBloqueado"
+                    />
+                  </div>
+                  <div class="modificador">
+                    <input
+                      name="modificadorFuerza"
+                      [(ngModel)]="modificadorFuerza"
+                      readonly
+                    />
+                  </div>
+                </li>
+                <li>
+                  <div class="puntuacion">
+                    <label for="puntuacionDestreza">Destreza</label>
+                    <input
+                      name="puntuacionDestreza"
+                      placeholder="0"
+                      (input)="actualizarModificadores()"
+                      (input)="guardarModificadorHabilidad()"
+                      [(ngModel)]="puntuacionDestreza"
+                      [readonly]="formularioBloqueado"
+                    />
+                  </div>
+                  <div class="modificador">
+                    <input
+                      name="modificadorDestreza"
+                      placeholder="0"
+                      [(ngModel)]="modificadorDestreza"
+                      readonly
+                    />
+                  </div>
+                </li>
+                <li>
+                  <div class="puntuacion">
+                    <label for="puntuacionConstitucion">Constitucion</label>
+                    <input
+                      name="puntuacionConstitucion"
+                      placeholder="0"
+                      (input)="actualizarModificadores()"
+                      (input)="guardarModificadorHabilidad()"
+                      [(ngModel)]="puntuacionConstitucion"
+                      [readonly]="formularioBloqueado"
+                    />
+                  </div>
+                  <div class="modificador">
+                    <input
+                      name="modificadorConstitucion"
+                      placeholder="0"
+                      [(ngModel)]="modificadorConstitucion"
+                      readonly
+                    />
+                  </div>
+                </li>
+                <li>
+                  <div class="puntuacion">
+                    <label for="puntuacionSabiduria">Sabiduría</label>
+                    <input
+                      name="puntuacionSabiduria"
+                      placeholder="0"
+                      (input)="actualizarModificadores()"
+                      (input)="guardarModificadorHabilidad()"
+                      [(ngModel)]="puntuacionSabiduria"
+                      [readonly]="formularioBloqueado"
+                    />
+                  </div>
+                  <div class="modificador">
+                    <input
+                      name="modificadorSabiduria"
+                      placeholder="0"
+                      [(ngModel)]="modificadorSabiduria"
+                      readonly
+                    />
+                  </div>
+                </li>
+                <li>
+                  <div class="puntuacion">
+                    <label for="puntuacionInteligencia">Inteligencia</label>
+                    <input
+                      name="puntuacionInteligencia"
+                      placeholder="0"
+                      (input)="actualizarModificadores()"
+                      (input)="guardarModificadorHabilidad()"
+                      [(ngModel)]="puntuacionInteligencia"
+                      [readonly]="formularioBloqueado"
+                    />
+                  </div>
+                  <div class="modificador">
+                    <input
+                      name="modificadorInteligencia"
+                      [(ngModel)]="modificadorInteligencia"
+                      readonly
+                    />
+                  </div>
+                </li>
+                <li>
+                  <div class="puntuacion">
+                    <label for="puntuacionCarisma">Carisma</label>
+                    <input
+                      name="puntuacionCarisma"
+                      placeholder="0"
+                      (input)="actualizarModificadores()"
+                      (input)="guardarModificadorHabilidad()"
+                      [(ngModel)]="puntuacionCarisma"
+                      [readonly]="formularioBloqueado"
+                    />
+                  </div>
+                  <div class="modificador">
+                    <input
+                      name="modificadorCarisma"
+                      [(ngModel)]="modificadorCarisma"
+                      readonly
+                    />
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="atributosCompetencia">
+              <div class="salvaciones seccionLista">
                 <ul>
                   <li>
-                    <div class="puntuacion">
-                      <label for="puntuacionFuerza">Fuerza</label><input name="puntuacionrFuerza" placeholder="0" />
-                    </div>
-                    <div class="modificador">
-                      <input name="modificadorFuerza" placeholder="0" />
-                    </div>
+                    <label for="salvacionFuerza">Fuerza</label>
+                    <input
+                      [(ngModel)]="textoSalvaciones.salvacionFuerza"
+                      name="salvacionFuerza"
+                      placeholder="0"
+                      type="text"
+                      [readonly]="formularioBloqueado"
+                    />
+                    <input
+                      name="salvacionFuerzaCompetencia"
+                      type="checkbox"
+                      class="salvacionCheckbox"
+                      [(ngModel)]="salvaciones.fuerza"
+                      (change)="comprobarLimiteSalvaciones()"
+                      (change)="guardarModificadorHabilidad()"
+                      [disabled]="formularioBloqueado"
+                    />
                   </li>
                   <li>
-                    <div class="puntuacion">
-                      <label for="puntuacionDestreza">Destreza</label><input name="puntuacionDestreza" placeholder="0" />
-                    </div>
-                    <div class="modificador">
-                      <input name="modificadorDestreza" placeholder="0" />
-                    </div>
+                    <label for="salvacionDestreza">Destreza</label>
+                    <input
+                      [(ngModel)]="textoSalvaciones.salvacionDestreza"
+                      name="salvacionDestreza"
+                      placeholder="0"
+                      type="text"
+                      [readonly]="formularioBloqueado"
+                    /><input
+                      name="salvacionDestrezaCompetencia"
+                      type="checkbox"
+                      class="salvacionCheckbox"
+                      [(ngModel)]="salvaciones.destreza"
+                      (change)="comprobarLimiteSalvaciones()"
+                      (change)="guardarModificadorHabilidad()"
+                      [disabled]="formularioBloqueado"
+                    />
                   </li>
                   <li>
-                    <div class="puntuacion">
-                      <label for="puntuacionConstitucion">Constitucion</label><input name="puntuacionConstitucion" placeholder="0" />
-                    </div>
-                    <div class="modificador">
-                      <input name="modificadorConstitucion" placeholder="0" />
-                    </div>
+                    <label for="salvacionConstitucionCompetencia"
+                      >Constitucion</label
+                    ><input
+                      [(ngModel)]="textoSalvaciones.salvacionConstitucion"
+                      name="salvacionConstitucion"
+                      placeholder="0"
+                      type="text"
+                      [readonly]="formularioBloqueado"
+                    /><input
+                      name="salvacionConstitucionCompetencia"
+                      type="checkbox"
+                      class="salvacionCheckbox"
+                      [(ngModel)]="salvaciones.constitucion"
+                      (change)="comprobarLimiteSalvaciones()"
+                      (change)="guardarModificadorHabilidad()"
+                      [disabled]="formularioBloqueado"
+                    />
                   </li>
                   <li>
-                    <div class="puntuacion">
-                      <label for="puntuacionSabiduria">Sabiduría</label><input name="puntuacionSabiduria" placeholder="0" />
-                    </div>
-                    <div class="modificador">
-                      <input name="modificadorSabiduria" placeholder="0" />
-                    </div>
+                    <label for="salvacionSabiduria">Sabiduría</label
+                    ><input
+                      [(ngModel)]="textoSalvaciones.salvacionSabiduria"
+                      name="salvacionSabiduria"
+                      placeholder="0"
+                      type="text"
+                      [readonly]="formularioBloqueado"
+                    /><input
+                      name="salvacionSabiduriaCompetencia"
+                      type="checkbox"
+                      class="salvacionCheckbox"
+                      [(ngModel)]="salvaciones.sabiduria"
+                      (change)="comprobarLimiteSalvaciones()"
+                      (change)="guardarModificadorHabilidad()"
+                      [disabled]="formularioBloqueado"
+                    />
                   </li>
                   <li>
-                    <div class="puntuacion">
-                      <label for="puntuacionInteligencia">Inteligencia</label><input name="puntuacionInteligencia" placeholder="0" />
-                    </div>
-                    <div class="modificador">
-                      <input name="modificadorInteligencia" placeholder="0" />
-                    </div>
+                    <label for="salvacionInteligencia">Inteligencia</label
+                    ><input
+                      [(ngModel)]="textoSalvaciones.salvacionInteligencia"
+                      name="salvacionInteligencia"
+                      placeholder="0"
+                      type="text"
+                      [readonly]="formularioBloqueado"
+                    /><input
+                      name="salvacionInteligenciaCompetencia"
+                      type="checkbox"
+                      class="salvacionCheckbox"
+                      [(ngModel)]="salvaciones.inteligencia"
+                      (change)="comprobarLimiteSalvaciones()"
+                      (change)="guardarModificadorHabilidad()"
+                      [disabled]="formularioBloqueado"
+                    />
                   </li>
                   <li>
-                    <div class="puntuacion">
-                      <label for="puntuacionCarisma">Carisma</label><input name="puntuacionCarisma" placeholder="0" />
-                    </div>
-                    <div class="modificador">
-                      <input name="modificadorCarisma" placeholder="0" />
-                    </div>
+                    <label for="salvacionCarisma">Carisma</label
+                    ><input
+                      [(ngModel)]="textoSalvaciones.salvacionCarisma"
+                      name="salvacionCarisma"
+                      placeholder="0"
+                      type="text"
+                      [readonly]="formularioBloqueado"
+                    /><input
+                      name="salvacionCarismaCompetencia"
+                      type="checkbox"
+                      class="salvacionCheckbox"
+                      [(ngModel)]="salvaciones.carisma"
+                      (change)="comprobarLimiteSalvaciones()"
+                      (change)="guardarModificadorHabilidad()"
+                      [disabled]="formularioBloqueado"
+                    />
                   </li>
                 </ul>
+                <div class="label">Tiradas de salvación</div>
               </div>
-              <div class="atributosCompetencia">
-                
-                <div class="salvaciones seccionLista">
-                  <ul>
-                    <li>
-                      <label for="salvacionFuerza">Fuerza</label><input name="SalvacionFuerza" placeholder="0" type="text" /><input name="SalvacionFuerzaCompetencia" type="checkbox" />
-                    </li>
-                    <li>
-                      <label for="salvacionDestreza">Destreza</label><input name="salvacionDestreza" placeholder="0" type="text" /><input name="salvacionDestrezaCompetencia" type="checkbox" />
-                    </li>
-                    <li>
-                      <label for="salvacionConstitucionCompetencia">Constitucion</label><input name="salvacionConstitucion" placeholder="0" type="text" /><input name="salvacionConstitucionCompetencia" type="checkbox" />
-                    </li>
-                    <li>
-                      <label for="salvacionSabiduria">Sabiduría</label><input name="salvacionSabiduria" placeholder="0" type="text" /><input name="salvacionSabiduriaCompetencia" type="checkbox" />
-                    </li>
-                    <li>
-                      <label for="salvacionInteligencia">Inteligencia</label><input name="salvacionInteligencia" placeholder="0" type="text" /><input name="salvacionInteligenciaCompetencia" type="checkbox" />
-                    </li>
-                    <li>
-                      <label for="salvacionCarisma">Carisma</label><input name="salvacionCarisma" placeholder="0" type="text" /><input name="salvacionCarismaCompetencia" type="checkbox" />
-                    </li>
-                  </ul>
-                  <div class="label">
-                    Tiradas de salvación
-                  </div>
-                </div>
-                <div class="habilidades seccionLista">
-                  <ul>
-                    <li>
-                      <label for="acrobacias">Acrobacias <span class="habilidad">(Des)</span></label><input name="Acrobacias" placeholder="0" type="text" /><input name="pruebaAcrobacias" type="checkbox" />
-                    </li>
-                    <li>
-                      <label for="tratoConAnimales">Trato con animales <span class="habilidad">(Sab)</span></label><input name="tratoConAnimales" placeholder="0" type="text" /><input name="pruebaTratoConAnimales" type="checkbox" />
-                    </li>
-                    <li>
-                      <label for="arcanos">Arcanos <span class="habilidad">(Int)</span></label><input name="Arcana" placeholder="0" type="text" /><input name="pruebaArcanos" type="checkbox" />
-                    </li>
-                    <li>
-                      <label for="atletismo">Atletismo <span class="habilidad">(Fue)</span></label><input name="Atletismo" placeholder="0" type="text" /><input name="pruebaAtletismo" type="checkbox" />
-                    </li>
-                    <li>
-                      <label for="enganio">Engaño <span class="habilidad">(Car)</span></label><input name="enganio" placeholder="0" type="text" /><input name="pruebaEnganio" type="checkbox" />
-                    </li>
-                    <li>
-                      <label for="historia">Historia <span class="habilidad">(Int)</span></label><input name="historia" placeholder="0" type="text" /><input name="pruebaHistoria" type="checkbox" />
-                    </li>
-                    <li>
-                      <label for="perspicacia">Perspicacia <span class="habilidad">(Sab)</span></label><input name="perspicacia" placeholder="0" type="text" /><input name="pruebaPerspicacia" type="checkbox" />
-                    </li>
-                    <li>
-                      <label for="intimidacion">Intimidacion <span class="habilidad">(Car)</span></label><input name="intimidacion" placeholder="0" type="text" /><input name="pruebaIntimidacion" type="checkbox" />
-                    </li>
-                    <li>
-                      <label for="investigacion">Investigacion <span class="habilidad">(Int)</span></label><input name="investigacion" placeholder="0" type="text" /><input name="pruebaInvestigacion" type="checkbox" />
-                    </li>
-                    <li>
-                      <label for="medicina">Medicina <span class="habilidad">(Sab)</span></label><input name="medicina" placeholder="0" type="text" /><input name="pruebaMedicina" type="checkbox" />
-                    </li>
-                    <li>
-                      <label for="naturaleza">Naturaleza <span class="habilidad">(Int)</span></label><input name="naturaleza" placeholder="0" type="text" /><input name="pruebaNaturaleza" type="checkbox" />
-                    </li>
-                    <li>
-                      <label for="percepcion">Percepción <span class="habilidad">(Sab)</span></label><input name="percepcion" placeholder="0" type="text" /><input name="pruebaPercepcion" type="checkbox" />
-                    </li>
-                    <li>
-                      <label for="interpretacion">Interpretación <span class="habilidad">(Car)</span></label><input name="interpretacion" placeholder="0" type="text" /><input name="pruebaInterpretacion" type="checkbox" />
-                    </li>
-                    <li>
-                      <label for="persuasion">Persuasión <span class="habilidad">(Car)</span></label><input name="persuasion" placeholder="0" type="text" /><input name="pruebaPersuasion" type="checkbox" />
-                    </li>
-                    <li>
-                      <label for="religion">Religión <span class="habilidad">(Int)</span></label><input name="religion" placeholder="0" type="text" /><input name="pruebaReligion" type="checkbox" />
-                    </li>
-                    <li>
-                      <label for="juegoDeManos">Juego de manos <span class="habilidad">(Des)</span></label><input name="juegoDeManos" placeholder="0" type="text" /><input name="pruebaJuegoDeManos" type="checkbox" />
-                    </li>
-                    <li>
-                      <label for="sigilo">Sigilo <span class="habilidad">(Des)</span></label><input name="sigilo" placeholder="0" type="text" /><input name="pruebaSigilo" type="checkbox" />
-                    </li>
-                    <li>
-                      <label for="supervivencia">Supervivencia <span class="habilidad">(Sab)</span></label><input name="supervivencia" placeholder="0" type="text" /><input name="pruebaSupervivencia" type="checkbox" />
-                    </li>
-                  </ul>
-                  <div class="label">
-                    Habilidades
-                  </div>
-                </div>
+              <div class="habilidades seccionLista">
+                <ul>
+                  <li>
+                    <label for="acrobacias"
+                      >Acrobacias <span class="habilidad">(Des)</span></label
+                    ><input
+                      [(ngModel)]="textoHabilidades.acrobacias"
+                      name="Acrobacias"
+                      placeholder="0"
+                      type="text"
+                      [readonly]="formularioBloqueado"
+                    /><input
+                      name="pruebaAcrobacias"
+                      type="checkbox"
+                      class="habilidadesCheckbox"
+                      [(ngModel)]="habilidades.acrobacias"
+                      (change)="comprobarLimiteHabilidades()"
+                      (change)="guardarModificadorHabilidad()"
+                      [disabled]="formularioBloqueado"
+                    />
+                  </li>
+                  <li>
+                    <label for="tratoConAnimales"
+                      >Trato con animales
+                      <span class="habilidad">(Sab)</span></label
+                    ><input
+                      [(ngModel)]="textoHabilidades.tratoConAnimales"
+                      name="tratoConAnimales"
+                      placeholder="0"
+                      type="text"
+                      [readonly]="formularioBloqueado"
+                    /><input
+                      name="pruebaTratoConAnimales"
+                      type="checkbox"
+                      class="habilidadesCheckbox"
+                      [(ngModel)]="habilidades.tratoConAnimales"
+                      (change)="comprobarLimiteHabilidades()"
+                      (change)="guardarModificadorHabilidad()"
+                      [disabled]="formularioBloqueado"
+                    />
+                  </li>
+                  <li>
+                    <label for="arcanos"
+                      >Arcanos <span class="habilidad">(Int)</span></label
+                    ><input
+                      [(ngModel)]="textoHabilidades.arcanos"
+                      name="Arcana"
+                      placeholder="0"
+                      type="text"
+                      [readonly]="formularioBloqueado"
+                    /><input
+                      name="pruebaArcanos"
+                      type="checkbox"
+                      class="habilidadesCheckbox"
+                      [(ngModel)]="habilidades.arcanos"
+                      (change)="comprobarLimiteHabilidades()"
+                      (change)="guardarModificadorHabilidad()"
+                      [disabled]="formularioBloqueado"
+                    />
+                  </li>
+                  <li>
+                    <label for="atletismo"
+                      >Atletismo <span class="habilidad">(Fue)</span></label
+                    ><input
+                      [(ngModel)]="textoHabilidades.atletismo"
+                      name="Atletismo"
+                      placeholder="0"
+                      type="text"
+                      [readonly]="formularioBloqueado"
+                    /><input
+                      name="pruebaAtletismo"
+                      type="checkbox"
+                      class="habilidadesCheckbox"
+                      [(ngModel)]="habilidades.atletismo"
+                      (change)="comprobarLimiteHabilidades()"
+                      (change)="guardarModificadorHabilidad()"
+                      [disabled]="formularioBloqueado"
+                    />
+                  </li>
+                  <li>
+                    <label for="enganio"
+                      >Engaño <span class="habilidad">(Car)</span></label
+                    ><input
+                      [(ngModel)]="textoHabilidades.enganio"
+                      name="enganio"
+                      placeholder="0"
+                      type="text"
+                      [readonly]="formularioBloqueado"
+                    /><input
+                      name="pruebaEnganio"
+                      type="checkbox"
+                      class="habilidadesCheckbox"
+                      [(ngModel)]="habilidades.enganio"
+                      (change)="comprobarLimiteHabilidades()"
+                      (change)="guardarModificadorHabilidad()"
+                      [disabled]="formularioBloqueado"
+                    />
+                  </li>
+                  <li>
+                    <label for="historia"
+                      >Historia <span class="habilidad">(Int)</span></label
+                    ><input
+                      [(ngModel)]="textoHabilidades.historia"
+                      name="historia"
+                      placeholder="0"
+                      type="text"
+                      [readonly]="formularioBloqueado"
+                    /><input
+                      name="pruebaHistoria"
+                      type="checkbox"
+                      class="habilidadesCheckbox"
+                      [(ngModel)]="habilidades.historia"
+                      (change)="comprobarLimiteHabilidades()"
+                      (change)="guardarModificadorHabilidad()"
+                      [disabled]="formularioBloqueado"
+                    />
+                  </li>
+                  <li>
+                    <label for="perspicacia"
+                      >Perspicacia <span class="habilidad">(Sab)</span></label
+                    ><input
+                      [(ngModel)]="textoHabilidades.perspicacia"
+                      name="perspicacia"
+                      placeholder="0"
+                      type="text"
+                      [readonly]="formularioBloqueado"
+                    /><input
+                      name="pruebaPerspicacia"
+                      type="checkbox"
+                      class="habilidadesCheckbox"
+                      [(ngModel)]="habilidades.perspicacia"
+                      (change)="comprobarLimiteHabilidades()"
+                      (change)="guardarModificadorHabilidad()"
+                      [disabled]="formularioBloqueado"
+                    />
+                  </li>
+                  <li>
+                    <label for="intimidacion"
+                      >Intimidacion <span class="habilidad">(Car)</span></label
+                    ><input
+                      [(ngModel)]="textoHabilidades.intimidacion"
+                      name="intimidacion"
+                      placeholder="0"
+                      type="text"
+                      [readonly]="formularioBloqueado"
+                    /><input
+                      name="pruebaIntimidacion"
+                      type="checkbox"
+                      class="habilidadesCheckbox"
+                      [(ngModel)]="habilidades.intimidacion"
+                      (change)="comprobarLimiteHabilidades()"
+                      (change)="guardarModificadorHabilidad()"
+                      [disabled]="formularioBloqueado"
+                    />
+                  </li>
+                  <li>
+                    <label for="investigacion"
+                      >Investigacion <span class="habilidad">(Int)</span></label
+                    ><input
+                      [(ngModel)]="textoHabilidades.investigacion"
+                      name="investigacion"
+                      placeholder="0"
+                      type="text"
+                      [readonly]="formularioBloqueado"
+                    /><input
+                      name="pruebaInvestigacion"
+                      type="checkbox"
+                      class="habilidadesCheckbox"
+                      [(ngModel)]="habilidades.investigacion"
+                      (change)="comprobarLimiteHabilidades()"
+                      (change)="guardarModificadorHabilidad()"
+                      [disabled]="formularioBloqueado"
+                    />
+                  </li>
+                  <li>
+                    <label for="medicina"
+                      >Medicina <span class="habilidad">(Sab)</span></label
+                    ><input
+                      [(ngModel)]="textoHabilidades.medicina"
+                      name="medicina"
+                      placeholder="0"
+                      type="text"
+                      [readonly]="formularioBloqueado"
+                    /><input
+                      name="pruebaMedicina"
+                      type="checkbox"
+                      class="habilidadesCheckbox"
+                      [(ngModel)]="habilidades.medicina"
+                      (change)="comprobarLimiteHabilidades()"
+                      (change)="guardarModificadorHabilidad()"
+                      [disabled]="formularioBloqueado"
+                    />
+                  </li>
+                  <li>
+                    <label for="naturaleza"
+                      >Naturaleza <span class="habilidad">(Int)</span></label
+                    ><input
+                      [(ngModel)]="textoHabilidades.naturaleza"
+                      name="naturaleza"
+                      placeholder="0"
+                      type="text"
+                      [readonly]="formularioBloqueado"
+                    /><input
+                      name="pruebaNaturaleza"
+                      type="checkbox"
+                      class="habilidadesCheckbox"
+                      [(ngModel)]="habilidades.naturaleza"
+                      (change)="comprobarLimiteHabilidades()"
+                      (change)="guardarModificadorHabilidad()"
+                      [disabled]="formularioBloqueado"
+                    />
+                  </li>
+                  <li>
+                    <label for="percepcion"
+                      >Percepción <span class="habilidad">(Sab)</span></label
+                    ><input
+                      [(ngModel)]="textoHabilidades.percepcion"
+                      name="percepcion"
+                      placeholder="0"
+                      type="text"
+                      [readonly]="formularioBloqueado"
+                    /><input
+                      name="pruebaPercepcion"
+                      type="checkbox"
+                      class="habilidadesCheckbox"
+                      [(ngModel)]="habilidades.percepcion"
+                      (change)="comprobarLimiteHabilidades()"
+                      (change)="guardarModificadorHabilidad()"
+                      [disabled]="formularioBloqueado"
+                    />
+                  </li>
+                  <li>
+                    <label for="interpretacion"
+                      >Interpretación
+                      <span class="habilidad">(Car)</span></label
+                    ><input
+                      [(ngModel)]="textoHabilidades.interpretacion"
+                      name="interpretacion"
+                      placeholder="0"
+                      type="text"
+                      [readonly]="formularioBloqueado"
+                    /><input
+                      name="pruebaInterpretacion"
+                      type="checkbox"
+                      class="habilidadesCheckbox"
+                      [(ngModel)]="habilidades.interpretacion"
+                      (change)="comprobarLimiteHabilidades()"
+                      (change)="guardarModificadorHabilidad()"
+                      [disabled]="formularioBloqueado"
+                    />
+                  </li>
+                  <li>
+                    <label for="persuasion"
+                      >Persuasión <span class="habilidad">(Car)</span></label
+                    ><input
+                      [(ngModel)]="textoHabilidades.persuasion"
+                      name="persuasion"
+                      placeholder="0"
+                      type="text"
+                      [readonly]="formularioBloqueado"
+                    /><input
+                      name="pruebaPersuasion"
+                      type="checkbox"
+                      class="habilidadesCheckbox"
+                      [(ngModel)]="habilidades.persuasion"
+                      (change)="comprobarLimiteHabilidades()"
+                      (change)="guardarModificadorHabilidad()"
+                      [disabled]="formularioBloqueado"
+                    />
+                  </li>
+                  <li>
+                    <label for="religion"
+                      >Religión <span class="habilidad">(Int)</span></label
+                    ><input
+                      [(ngModel)]="textoHabilidades.religion"
+                      name="religion"
+                      placeholder="0"
+                      type="text"
+                      [readonly]="formularioBloqueado"
+                    /><input
+                      name="pruebaReligion"
+                      type="checkbox"
+                      class="habilidadesCheckbox"
+                      [(ngModel)]="habilidades.religion"
+                      (change)="comprobarLimiteHabilidades()"
+                      (change)="guardarModificadorHabilidad()"
+                      [disabled]="formularioBloqueado"
+                    />
+                  </li>
+                  <li>
+                    <label for="juegoDeManos"
+                      >Juego de manos
+                      <span class="habilidad">(Des)</span></label
+                    ><input
+                      [(ngModel)]="textoHabilidades.juegoDeManos"
+                      name="juegoDeManos"
+                      placeholder="0"
+                      type="text"
+                      [readonly]="formularioBloqueado"
+                    /><input
+                      name="pruebaJuegoDeManos"
+                      type="checkbox"
+                      class="habilidadesCheckbox"
+                      [(ngModel)]="habilidades.juegoDeManos"
+                      (change)="comprobarLimiteHabilidades()"
+                      (change)="guardarModificadorHabilidad()"
+                      [disabled]="formularioBloqueado"
+                    />
+                  </li>
+                  <li>
+                    <label for="sigilo"
+                      >Sigilo <span class="habilidad">(Des)</span></label
+                    ><input
+                      [(ngModel)]="textoHabilidades.sigilo"
+                      name="sigilo"
+                      placeholder="0"
+                      type="text"
+                      [readonly]="formularioBloqueado"
+                    /><input
+                      name="pruebaSigilo"
+                      type="checkbox"
+                      class="habilidadesCheckbox"
+                      [(ngModel)]="habilidades.sigilo"
+                      (change)="comprobarLimiteHabilidades()"
+                      (change)="guardarModificadorHabilidad()"
+                      [disabled]="formularioBloqueado"
+                    />
+                  </li>
+                  <li>
+                    <label for="supervivencia"
+                      >Supervivencia <span class="habilidad">(Sab)</span></label
+                    ><input
+                      [(ngModel)]="textoHabilidades.supervivencia"
+                      name="supervivencia"
+                      placeholder="0"
+                      type="text"
+                      [readonly]="formularioBloqueado"
+                    /><input
+                      name="pruebaSupervivencia"
+                      type="checkbox"
+                      class="habilidadesCheckbox"
+                      [(ngModel)]="habilidades.supervivencia"
+                      (change)="comprobarLimiteHabilidades()"
+                      (change)="guardarModificadorHabilidad()"
+                      [disabled]="formularioBloqueado"
+                    />
+                  </li>
+                </ul>
+                <div class="label">Habilidades</div>
               </div>
-            </section>
+            </div>
           </section>
-          <section>
-            <section class="combate">
-              <div class="valorCompetencia">
-                <div>
-                  <label for="valorCompetencia">Competencia</label><input name="valorCompetencia" placeholder="0" type="text" />
+        </section>
+        <section>
+          <section class="combate">
+            <div class="valorCompetencia">
+              <div>
+                <label for="valorCompetencia">Competencia</label>
+                <input
+                  name="valorCompetencia"
+                  type="text"
+                  [(ngModel)]="valorCompetencia"
+                  readonly
+                />
+              </div>
+            </div>
+            <div class="iniciativa">
+              <div>
+                <label for="iniciativa">Iniciativa</label>
+                <input
+                  name="iniciativa"
+                  type="text"
+                  [(ngModel)]="iniciativa"
+                  readonly
+                />
+              </div>
+            </div>
+            <div class="velocidad">
+              <div>
+                <label for="velocidad">velocidad</label>
+                <input name="velocidad" type="text" readonly value="30" />
+              </div>
+            </div>
+            <div class="pg">
+              <div class="puntosGolpe">
+                <div class="max">
+                  <label for="pgMax">Puntos de golpe máximos</label>
+                  <input
+                    name="pgMax"
+                    placeholder="0"
+                    [(ngModel)]="puntosGolpeMaximo"
+                    type="text"
+                    [readonly]="formularioBloqueado"
+                  />
+                </div>
+                <div class="puntosGolpeActuales">
+                  <label for="puntosActuales">Puntos de golpe</label>
+                  <input
+                    name="puntosActuales"
+                    [(ngModel)]="puntosGolpe"
+                    placeholder="0"
+                    type="text"
+                    [readonly]="formularioBloqueado"
+                  />
                 </div>
               </div>
-              <div class="iniciativa">
-                <div>
-                  <label for="iniciativa">Iniciativa</label><input name="iniciativa" placeholder="0" type="text" />
-                </div>
+              <div class="dadoGolpe">
+                <label for="dadoGolpe">Dado de golpe</label>
+                <input
+                  name="dadoGolpe"
+                  type="text"
+                  readonly
+                  [(ngModel)]="dadoGolpe"
+                />
               </div>
-              <div class="velocidad">
-                <div>
-                  <label for="velocidad">velocidad</label><input name="velocidad" placeholder="30" type="text" />
-                </div>
-              </div>
-              <div class="pg">
-                <div class="puntosGolpe">
-                  <div class="max">
-                    <label for="pgMax">Puntos de golpe máximos</label><input name="pgMax" placeholder="0" type="text" />
-                  </div>
-                  <div class="puntosGolpeActuales">
-                    <label for="puntosActuales">Puntos de golpe</label><input name="puntosActuales" placeholder="0" type="text" />
-                  </div>
-                </div>
-                <div class="dadoGolpe">
-                  <label for="dadoGolpe">Dado de golpe</label><input name="dadoGolpe" placeholder="1d8" type="text" />
-                </div>
-              </div>
-            </section>
+            </div>
           </section>
-        </main>
-      </form>
-</body>
+          <button type="button" class="aceptar" (click)="guardarPersonaje()">
+            Guardar personaje
+          </button>
+        </section>
+      </main>
+    </form>
+  </body>
+</html>

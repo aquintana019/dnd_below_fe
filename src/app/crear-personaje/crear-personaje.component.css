@@ -27,12 +27,12 @@ form.hojaPersonaje{
     left: 0;
     margin-right: auto;
     margin-left: auto;
-    margin-top: 20%;
+    margin-top: 12%;
+    margin-bottom: 2%;
     background: url(https://startplaying.games/_next/image?url=https%3A%2F%2Fspg-images.s3.us-west-1.amazonaws.com%2Ff08525ee-cec5-4644-bff2-d0c58f993bf9&w=3840&q=75);
     
     border: 15px dotted rgb(242, 237, 237);
     border-radius: 15px;
-    /*opacity: .9;*/
 }
 
 form.hojaPersonaje div.textblock{
@@ -57,6 +57,7 @@ form.hojaPersonaje ul{
     margin: 0;
     padding: 0;
 }
+
 
 form.hojaPersonaje li{
     list-style-image: none;
@@ -116,6 +117,17 @@ section.miscelanea ul{
     padding: 10px 0px 5px 0px;
     display: flex;
     flex-wrap: wrap;
+}
+
+section.miscelanea select{
+    display: flex;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    height: 17.9px;
+    border-bottom: 1px solid rgb(171, 35, 35);
+   
 }
 
 section.miscelanea li{
@@ -414,4 +426,12 @@ section.combate div.dadoGolpe label{
     border: 0;
 }
 
+.aceptar{
+ margin-top: 10%;
+ margin-left: 40%;
+ width: 300px;
+ height: 50px;
+ border-radius: 10px;
+ box-shadow:  -3px -3px 7px gray, 3px 3px 5px black;
+}
 

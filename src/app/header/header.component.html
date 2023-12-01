@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="/src/app/header/header.component.css"  media="screen" /> 
 <header>
-    <a href="" class="logo"><img src="https://cdn-icons-png.flaticon.com/512/6545/6545894.png" height="25px"><span>DnD Below</span></a>
+    <a href="" class="logo"><img src="assets/logo.png" height="25px"><span>DnD Below</span></a>
 
     <ul class="barraNavegacion">
         <li><a href="datos-clase">Clases</a></li>
@@ -23,9 +23,10 @@
         <a href="crear-usuario" class="usuario">Registrarse</a>
     </div>  
 
-    <div *ngIf="usuario != ''">
-        <!-- Mostrar información para usuarios autenticados  (click)="logout()"-->
-        <p>Bienvenido, {{usuario}}</p>
-        <button >Logout</button>
+    
+    <div  class="usuarioLogueado" *ngIf="usuario != ''">
+        <a href="../lista-personajes/">Mis personajes</a>
+        <p>Hola, {{usuario}}</p>
+        <button type="reset" (click)="clickLogout()">Logout</button>
     </div>
 </header>

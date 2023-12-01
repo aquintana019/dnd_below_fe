@@ -1,6 +1,7 @@
-import { NgModule, OnInit } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms"
 import { BrowserModule } from '@angular/platform-browser';
+import { CookieService } from 'ngx-cookie-service';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -40,10 +41,9 @@ import { HeaderComponent } from './header/header.component';
     HttpClientModule,
     GraphQLModule,
     ReactiveFormsModule,
-    FormsModule,
-    
+    FormsModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

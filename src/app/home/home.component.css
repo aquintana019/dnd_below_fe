@@ -2,7 +2,7 @@
 
 section{
     display: flex;
-    width: 600px;
+    width: 1200px;
     height: 430px;
   }
   section img{
@@ -14,20 +14,26 @@ section{
   }
   section img:hover{
     cursor: crosshair;
-    width: 300px;
+    width: 500px;
     opacity: 1;
     filter: contrast(120%);
   }
 
+  @media screen and (max-width: 600px) {
+    section {
+      margin-top: -50%;
+      display: flex;
+      width: 400px;
+      height: 230px;
+    }
 
-
-
-@media (max-width: 1020px){
-    .barraNavegacion{
-        position: absolute;
-        top: 100%;
-        right: 5%;
-        width: 300px;
-        height:30px;
+    section img {
+      height: 350px;
+    }
+    section img:hover{
+      cursor: crosshair;
+      width: 200px;
+      opacity: 1;
+      filter: contrast(120%);
     }
 }

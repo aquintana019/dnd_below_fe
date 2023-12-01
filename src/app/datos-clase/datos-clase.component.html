@@ -14,22 +14,17 @@
     </div>
 
     <div class="grid-container" *ngIf="clases">
-        <!-- Repeat this block for each card -->
         <div class="flip-card" *ngFor="let clase of clases">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
-                    <!-- Front content, you can add an image or other content here -->
                     <img src="https://i.etsystatic.com/12696278/r/il/460fc5/2820649566/il_fullxfull.2820649566_97dp.jpg" alt="Front Image">
                     <h4>{{clase.nombreClase}}</h4>
                 </div>
-                <div class="flip-card-back">
-                    <!-- Back content, you can add additional details here -->
-                   
+                <div class="flip-card-back">           
                     <p>{{clase.descripcion}}</p>
                 </div>
             </div>
         </div>
-        <!-- Repeat this block for each card -->
     </div>
 
 

@@ -10,20 +10,21 @@
 header{
     position: fixed;
     width: 100%;
+    height: 10%;
     top:0;
     right: 0;
-    z-index: 1000;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-image: url(https://exn6yww6zqg.exactdn.com/wp-content/uploads/2019/08/fortress_by_malverro_dcskn4j.jpg?strip=all&lossy=1&w=2560&ssl=1);
+    background-image: url('/src/assets/fondoHeader.jpg');
    background-size: cover;
     padding: 0.5% 5%;
    
 }
 
 .logo{
-    display: flex;
+    display: block;
     align-items: center;
     margin-left: -5%;
 
@@ -44,9 +45,6 @@ header{
     margin: 0px 10px;
 }
 
- a:hover{
-    color:red;
-}
 
 .caja{
     outline: none;
@@ -65,6 +63,8 @@ header{
     display: flex;
     align-items: baseline;
 }
+
+
 
 
 .textBoxes :hover{
@@ -97,6 +97,36 @@ header{
 
 }
 
+.usuarioLogueado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 130px; 
+  } 
+
+  .usuarioLogueado a, p{
+    margin-right: 10px;
+  }
+
+  .usuarioLogueado button{
+    width: 50px;
+    height: 30px;
+    background: white;
+    border: 1px solid olive;
+    border-radius: 10px;
+    outline: none;
+    margin: 10px 5px;
+  }
+
+  .usuarioLogueado button:hover{
+    background: rgb(207, 236, 207);
+    border: 1.2px solid olive;
+    color: rgb(164, 59, 59);
+    font-weight: bold;
+    box-shadow: 0 7px 7px 0 #1f212348;
+  }
+
+
 @media (max-width: 700px){
     .barraNavegacion{
         position: absolute;
@@ -112,3 +142,4 @@ header{
     }
 
 }
+

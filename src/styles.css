@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-decoration: none;
+    list-style: none;
+}
+
+a{
+    color: purple;
+}
+
+a:hover{
+    color:red;
+}
+
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url(https://www.pauljoyce.co.uk/wp-content/uploads/2018/07/fantasy_world_building_e9e872487c73583b2adc301fa49fd718.jpg) fixed;
+    
+}
+

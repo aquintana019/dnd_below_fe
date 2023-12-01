@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de personajes</title>
-    <link rel="stylesheet" href="/src/app/lista-personajes/lista-personajes.component.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/src/app/lista-personajes/lista-personajes.component.css"  media="screen" /> 
 </head>
 <body>
-    
-  <div class="carta">
-    <div class="imagenCarta"></div>
-    <div class="contenido">
-        <div class="titulo">
-            <a href=""><h2>Nombre de personaje</h2></a>
+
+  <button class="boton-crear" (click)="irAHojaPersonaje('0')">Crear personaje</button>
+
+  <div id="contenedor" *ngIf="personajes">
+    <ul class="lista-personajes" *ngFor="let personaje of personajes">
+      <li class="tarjeta">
+        <img src="https://www.egames.news/__export/1684908335995/sites/debate/img/2023/05/23/vaporeon_monster_hunter.jpg_423682103.jpg" alt="Imagen 1" class="imagen">
+        <div class="contenido">
+          <h3>{{personaje.nombrePersonaje}}</h3>
+          <p>{{personaje.raza}}</p>
+          <p>{{personaje.clase}}</p>
+          <button class="boton" (click)="verPersonaje(personaje.id)">Ver personaje</button>
+          <button class="boton" (click)="irAHojaPersonaje(personaje.id)">Modificar personaje</button>
+          <button class="boton" (click)="eliminarPersonaje(personaje.id)">Eliminar personaje</button>
         </div>
-        <div class="texto">
-            <h3>Raza:</h3>
-            <h3>Clase</h3>
-        </div>
-        <div class="boton">
-            <button>Borrar</button>
-        </div>
-    </div>
+      </li>
+    </ul>
   </div>
-  
-    
+
 </body>
 </html>
