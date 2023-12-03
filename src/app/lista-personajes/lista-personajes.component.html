@@ -12,15 +12,15 @@
   <div id="contenedor" *ngIf="personajes">
     <ul class="lista-personajes" *ngFor="let personaje of personajes">
       <li class="tarjeta">
-        <img src="https://www.egames.news/__export/1684908335995/sites/debate/img/2023/05/23/vaporeon_monster_hunter.jpg_423682103.jpg" alt="Imagen 1" class="imagen">
+        <img [src]="asignarImagen(personaje.clasePersonaje)" alt="Imagen 1" class="imagen">
         <div class="contenido">
           <h3>{{personaje.nombrePersonaje}}</h3>
           <p>{{personaje.raza}}</p>
-          <p>{{personaje.clase}}</p>
+          <p>{{personaje.clasePersonaje}}</p>
           <button class="boton" (click)="verPersonaje(personaje.id)">Ver personaje</button>
           <button class="boton" (click)="irAHojaPersonaje(personaje.id)">Modificar personaje</button>
-          <button class="boton" (click)="eliminarPersonaje(personaje.id)">Eliminar personaje</button>
-        </div>
+          <button class="boton" (click)="confirmarEliminarPersonaje(personaje.id)">Eliminar personaje</button>
+        </div>  
       </li>
     </ul>
   </div>

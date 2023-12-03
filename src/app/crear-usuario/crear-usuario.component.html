@@ -10,11 +10,14 @@
     <main>
         <form [formGroup]="this.formulario">
         <div class="cajaPerfil">
-            <img src=""/>
+            <!-- <img src=""/>
             <input type="file" name="" id="imagen" accept="image/*">
-            <label for="imagen">Seleccionar imagen de perfil</label>
+            <label for="imagen">Seleccionar imagen de perfil</label> -->
             <input type="text" name="usuario" placeholder="Nombre de usuario" formControlName="usuario">
 
+            <div *ngIf="mensajeError" class="errores">
+                {{ mensajeError }}
+              </div>
             <div class="errores" *ngIf="formulario.get('usuario')?.hasError('required') && formulario.get('usuario')?.touched">
                 Este campo es obligatorio.
             </div>
@@ -24,6 +27,9 @@
             </div>
             <div class="errores" *ngIf="formulario.get('password')?.hasError('minlength')">
                 El tamaño mínimo es 6.
+            </div>
+            <div class="errores" *ngIf="formulario.get('password')?.hasError('pattern')">
+                Debe contener al menos una mayúscula y un numero
             </div>
            
 

@@ -14,7 +14,7 @@ section{
   }
   section img:hover{
     cursor: crosshair;
-    width: 500px;
+    width: 400px;
     opacity: 1;
     filter: contrast(120%);
   }

@@ -11,7 +11,7 @@
     border: 2px solid gold;
     box-shadow:  -3px -3px 7px gray, 3px 3px 5px black;
     border-radius: 5px;
-    background-image: url(https://startplaying.games/_next/image?url=https%3A%2F%2Fspg-images.s3.us-west-1.amazonaws.com%2Ff08525ee-cec5-4644-bff2-d0c58f993bf9&w=3840&q=75);
+    background-image: url('/assets/fondo2.jpg');
     background-size: cover;
     opacity: .9;
     margin-top: 20%;

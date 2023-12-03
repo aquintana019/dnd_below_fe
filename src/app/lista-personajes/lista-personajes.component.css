@@ -8,7 +8,7 @@ body {
 
   .boton-crear {
     background-image: url(https://img.freepik.com/premium-photo/old-vintage-paper-texture-background_293060-5242.jpg);
-    border: none;
+    
     margin-bottom: 10px; 
     padding: 10px 16px;
     text-align: center;
@@ -21,6 +21,10 @@ body {
     width: 50%;
     z-index: 1; 
     border-radius: 10px;
+  }
+
+  .boton-crear:hover{
+    box-shadow: 0 7px 7px 0 #1f212348;
   }
 
   #contenedor::-webkit-scrollbar {
@@ -84,7 +88,7 @@ body {
   .boton {
     background-color: burlywood;
     color: #ffffff;
-    border: none;
+    
     margin-top: 10%;
     margin-right: 10px; 
     padding: 10px 16px;
@@ -93,4 +97,8 @@ body {
     display: inline-block;
     font-size: 14px;
     cursor: pointer;
+  }
+
+  .boton:hover{
+    box-shadow: 0 7px 7px 0 #1f212348;
   }

@@ -17,7 +17,7 @@ header{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-image: url('/src/assets/fondoHeader.jpg');
+    background-image: url('/assets/fondoHeader.jpg');
    background-size: cover;
     padding: 0.5% 5%;
    
@@ -64,7 +64,25 @@ header{
     align-items: baseline;
 }
 
+.menuDesplegable {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+   
+}
 
+.barra {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 6px 0;
+}
+
+
+.barraNavegacion.active {
+    display: flex;
+    flex-direction: column;
+}
 
 
 .textBoxes :hover{
@@ -128,18 +146,26 @@ header{
 
 
 @media (max-width: 700px){
-    .barraNavegacion{
-        position: absolute;
-        top: 100%;
-        right: 5%;
-        width: 200px;
-        height: 30px;
+
+    .menuDesplegable {
         display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
+    }
+    .barraNavegacion {
+        display: none;
+        position: absolute;
+        top: 50px; 
+        right: 0;
+        width: 200px;
+        background-color: #fff; 
         border-radius: 10px;
-        transition: all .50 ease;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+       
     }
 
+    .barraNavegacion.active {
+        display: flex;
+        flex-direction: column;
+    }
+    
 }
 

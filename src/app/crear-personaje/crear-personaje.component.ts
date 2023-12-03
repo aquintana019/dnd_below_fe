@@ -162,6 +162,7 @@ export class CrearPersonajeComponent {
 
   formularioBloqueado: boolean = false;
 
+  
   actualizarModificadores(): void {
     
 
@@ -205,30 +206,41 @@ export class CrearPersonajeComponent {
   }
 
   ngOnInit(): void {
-    this.cargarClases();
-    if (history.state.id != '0') {
-      this.apollo.watchQuery({
-        query: BUSCAR_PERSONAJE_POR_ID,
-        variables: {
-          id: parseInt(history.state.id)
-        }
-      }).valueChanges.subscribe(({data, error}:any) =>{
-        this.datosPersonaje= data.encontrarPersonajePorId;
-        this.cargarDatosPersonaje(data);
-
-        if (history.state.bloqueado) {
-          this.formularioBloqueado = true;
-
-          
-        }
-
-        this.actualizarCompetencia();
-        this.actualizarDadoGolpe();
-        this.actualizarModificadores();
-        this.guardarModificadorHabilidad();
-      })
+    if(!this.cookieService.get("misDatos")){
+      this.router.navigate(['']);
+    }else{
+      
+      this.cargarClases();
+      if (history.state.id != '0') {
+        this.apollo.watchQuery({
+          query: BUSCAR_PERSONAJE_POR_ID,
+          variables: {
+            id: parseInt(history.state.id)
+          }
+        }).valueChanges.subscribe(({data, error}:any) =>{
+          this.datosPersonaje= data.encontrarPersonajePorId;
+          this.cargarDatosPersonaje(data);
+  
+          if (history.state.bloqueado) {
+            this.formularioBloqueado = true;
+  
+            
+          }
+  
+          this.actualizarCompetencia();
+          this.actualizarDadoGolpe();
+          this.actualizarModificadores();
+          this.guardarModificadorHabilidad();
+        })
+      }
     }
-    
+  }
+
+  deshabilitarCheckboxes(claseCheckbox: string): void {
+    const checkboxes = document.getElementsByClassName(claseCheckbox) as HTMLCollectionOf<HTMLInputElement>;
+    for (let i = 0; i < checkboxes.length; i++) {
+      checkboxes[i].disabled = true;
+    }
   }
 
   cargarDatosPersonaje(data: any): void {
@@ -252,6 +264,16 @@ export class CrearPersonajeComponent {
     (this.habilidades as any)[data.encontrarPersonajePorId.competencia3] = true;
     (this.habilidades as any)[data.encontrarPersonajePorId.competencia4] = true;
     (this.habilidades as any)[data.encontrarPersonajePorId.competencia5] = true;
+
+    this.apollo.watchQuery({
+      query: BUSCAR_CLASE_POR_NOMBRE,
+      variables:{
+        nombre: this.claseSeleccionada
+      }
+    }).valueChanges.subscribe(({datosClase}:any) =>{
+      (this.salvaciones as any)[datosClase.getClasesPorNombre.tiradaSalvacion1] = true;
+      (this.salvaciones as any)[datosClase.getClasesPorNombre.tiradaSalvacion2] = true;
+    })
 
     this.puntosGolpeMaximo = data.encontrarPersonajePorId.puntosGolpeMaximo;
     this.puntosGolpe = data.encontrarPersonajePorId.puntosGolpe;
@@ -295,47 +317,57 @@ export class CrearPersonajeComponent {
       }
     }).valueChanges.subscribe(({data}:any) =>{
       this.dadoGolpe = '1d' + data.getClasesPorNombre.dadoGolpe;
+      this.salvaciones.carisma = false;
+      this.salvaciones.constitucion = false;
+      this.salvaciones.destreza = false;
+      this.salvaciones.fuerza = false;
+      this.salvaciones.inteligencia = false;
+      this.salvaciones.sabiduria = false;
+      (this.salvaciones as any)[data.getClasesPorNombre.tiradaSalvacion1] = true;
+      (this.salvaciones as any)[data.getClasesPorNombre.tiradaSalvacion2] = true;
+      this.guardarModificadorHabilidad();
     })
-  }
-  
-  comprobarLimiteSalvaciones(): void {
-    const limiteCheckboxes = 2; 
-    const checkboxes = document.getElementsByClassName('salvacionCheckbox');
-    this.checkboxesSeleccionados = Array.from(checkboxes).filter((checkbox: any) => checkbox.checked).length;
-  
-
-    if (this.checkboxesSeleccionados > limiteCheckboxes) {
-      const checkboxesArray = Array.from(checkboxes);
-      checkboxesArray.reverse();
-
-      const ultimoCheckboxMarcado = checkboxesArray.find((checkbox: any) => checkbox.checked);
-
-      if (ultimoCheckboxMarcado && ultimoCheckboxMarcado instanceof HTMLInputElement) {
-        ultimoCheckboxMarcado.checked = false;
-        this.checkboxesSeleccionados--;
-      }
-    }
   }
 
   comprobarLimiteHabilidades(): void {
-    const limiteCheckboxes = 5; 
-    const checkboxes = document.getElementsByClassName('habilidadesCheckbox');
-    this.checkboxesSeleccionados = Array.from(checkboxes).filter((checkbox: any) => checkbox.checked).length;
+    const limiteCheckboxes = 5;
+    const checkboxes = document.getElementsByClassName('habilidadesCheckbox') as HTMLCollectionOf<HTMLInputElement>;
   
-
-    if (this.checkboxesSeleccionados > limiteCheckboxes) {
-      const checkboxesArray = Array.from(checkboxes);
-      checkboxesArray.reverse();
-
-      const ultimoCheckboxMarcado = checkboxesArray.find((checkbox: any) => checkbox.checked);
-
-      if (ultimoCheckboxMarcado && ultimoCheckboxMarcado instanceof HTMLInputElement) {
-        ultimoCheckboxMarcado.checked = false;
-        this.checkboxesSeleccionados--;
+    this.checkboxesSeleccionados = Array.from(checkboxes).filter((checkbox) => checkbox.checked).length;
+  
+    if (this.checkboxesSeleccionados >= limiteCheckboxes) {
+      for (let i = 0; i < checkboxes.length; i++) {
+        if (!checkboxes[i].checked) {
+          checkboxes[i].disabled = true;
+        }
+      }
+    } else {
+      for (let i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].disabled = false;
       }
     }
   }
-
+  
+  comprobarLimiteSalvaciones(): void {
+    const limiteCheckboxes = 2;
+    const checkboxes = document.getElementsByClassName('salvacionCheckbox') as HTMLCollectionOf<HTMLInputElement>;
+  
+    this.checkboxesSeleccionados = Array.from(checkboxes).filter((checkbox) => checkbox.checked).length;
+  
+    if (this.checkboxesSeleccionados >= limiteCheckboxes) {
+      for (let i = 0; i < checkboxes.length; i++) {
+        if (!checkboxes[i].checked) {
+          checkboxes[i].disabled = true;
+        }
+      }
+    } else {
+      for (let i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].disabled = false;
+      }
+    }
+  }
+  
+  
   obtenerSalvacionesMarcadas() {
      this.salvacionesMarcadas = Object.entries(this.salvaciones)
       .filter(([_, marcada]) => marcada)
@@ -504,6 +536,9 @@ export class CrearPersonajeComponent {
     this.obtenerHabilidadesMarcadas()
     const cookieData = this.cookieService.get("misDatos");
     const datosCookie = JSON.parse(cookieData);
+    console.log(datosCookie[1])
+    console.log(datosCookie[0])
+    console.log(datosCookie[2])
 
     if (history.state.id == '0') {
       this.apollo
@@ -539,7 +574,10 @@ export class CrearPersonajeComponent {
       }).subscribe(
         (response) => {
           console.log('Personaje creado exitosamente:', response);
-          this.router.navigate(['lista-personajes']);
+          this.router.navigate(['lista-personajes'])
+          .then(() => {
+            window.location.reload();
+          });
         },
         (error) => {
           console.error('Error al crear personaje:', error);

@@ -23,6 +23,15 @@ export class HeaderComponent {
   usuario: String=""
   usuarioID: Number= 0
   esAdmin: Number= 0
+  isMenuOpen: boolean = false;
+
+  desplegarMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  cerrarMenu(): void {
+    this.isMenuOpen = false;
+  }
 
   ngOnInit(): void {
     const cookieData = this.cookieService.get("misDatos");
@@ -59,30 +68,13 @@ export class HeaderComponent {
   }
     
 
-  //   this.apollo.
-  //   login(this.form.get('usuario'))?.value, this.form.get('password')?.value)
-  //   .subscribe((response)) => {
-  //     this.router.navigate(['/']);
-  //   }
-  // };
-
    clickLogout(): void {
-    console.log("Test");
     this.cookieService.delete('misDatos');
     this.usuario = '';
     this.usuarioID = 0;
     this.esAdmin = 0;
+    this.router.navigate(['/']);
    }
 
-  // login(form:NgForm){
-
-  //   const usuario = form.value.usuario
-  //   const password = form.value.password
-
-  //   this.apollo.watchQuery({
-  //     query: LOGIN,
-  //     variables: {user:usuario, password: password},
-  //   }).valueChanges.subscribe
-  // }
   
 }

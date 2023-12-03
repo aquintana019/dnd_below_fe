@@ -23,7 +23,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url(https://www.pauljoyce.co.uk/wp-content/uploads/2018/07/fantasy_world_building_e9e872487c73583b2adc301fa49fd718.jpg) fixed;
+    background: url('/assets/fantasy_world_building_e9e872487c73583b2adc301fa49fd718.jpg') fixed;
     
 }
 

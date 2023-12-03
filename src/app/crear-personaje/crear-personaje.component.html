@@ -235,7 +235,7 @@
                       name="salvacionFuerza"
                       placeholder="0"
                       type="text"
-                      [readonly]="formularioBloqueado"
+                      readonly
                     />
                     <input
                       name="salvacionFuerzaCompetencia"
@@ -244,7 +244,7 @@
                       [(ngModel)]="salvaciones.fuerza"
                       (change)="comprobarLimiteSalvaciones()"
                       (change)="guardarModificadorHabilidad()"
-                      [disabled]="formularioBloqueado"
+                      disabled
                     />
                   </li>
                   <li>
@@ -254,7 +254,7 @@
                       name="salvacionDestreza"
                       placeholder="0"
                       type="text"
-                      [readonly]="formularioBloqueado"
+                      readonly
                     /><input
                       name="salvacionDestrezaCompetencia"
                       type="checkbox"
@@ -262,7 +262,7 @@
                       [(ngModel)]="salvaciones.destreza"
                       (change)="comprobarLimiteSalvaciones()"
                       (change)="guardarModificadorHabilidad()"
-                      [disabled]="formularioBloqueado"
+                      disabled
                     />
                   </li>
                   <li>
@@ -273,7 +273,7 @@
                       name="salvacionConstitucion"
                       placeholder="0"
                       type="text"
-                      [readonly]="formularioBloqueado"
+                      readonly
                     /><input
                       name="salvacionConstitucionCompetencia"
                       type="checkbox"
@@ -281,7 +281,7 @@
                       [(ngModel)]="salvaciones.constitucion"
                       (change)="comprobarLimiteSalvaciones()"
                       (change)="guardarModificadorHabilidad()"
-                      [disabled]="formularioBloqueado"
+                      disabled
                     />
                   </li>
                   <li>
@@ -291,7 +291,7 @@
                       name="salvacionSabiduria"
                       placeholder="0"
                       type="text"
-                      [readonly]="formularioBloqueado"
+                      readonly
                     /><input
                       name="salvacionSabiduriaCompetencia"
                       type="checkbox"
@@ -299,7 +299,7 @@
                       [(ngModel)]="salvaciones.sabiduria"
                       (change)="comprobarLimiteSalvaciones()"
                       (change)="guardarModificadorHabilidad()"
-                      [disabled]="formularioBloqueado"
+                      disabled
                     />
                   </li>
                   <li>
@@ -309,7 +309,7 @@
                       name="salvacionInteligencia"
                       placeholder="0"
                       type="text"
-                      [readonly]="formularioBloqueado"
+                      readonly
                     /><input
                       name="salvacionInteligenciaCompetencia"
                       type="checkbox"
@@ -317,7 +317,7 @@
                       [(ngModel)]="salvaciones.inteligencia"
                       (change)="comprobarLimiteSalvaciones()"
                       (change)="guardarModificadorHabilidad()"
-                      [disabled]="formularioBloqueado"
+                      disabled
                     />
                   </li>
                   <li>
@@ -327,7 +327,7 @@
                       name="salvacionCarisma"
                       placeholder="0"
                       type="text"
-                      [readonly]="formularioBloqueado"
+                      readonly
                     /><input
                       name="salvacionCarismaCompetencia"
                       type="checkbox"
@@ -335,7 +335,7 @@
                       [(ngModel)]="salvaciones.carisma"
                       (change)="comprobarLimiteSalvaciones()"
                       (change)="guardarModificadorHabilidad()"
-                      [disabled]="formularioBloqueado"
+                      disabled
                     />
                   </li>
                 </ul>
@@ -758,7 +758,7 @@
               </div>
             </div>
           </section>
-          <button type="button" class="aceptar" (click)="guardarPersonaje()">
+          <button type="button" class="aceptar" (click)="guardarPersonaje()"  [disabled]="formularioBloqueado">
             Guardar personaje
           </button>
         </section>

@@ -23,4 +23,37 @@ export class DatosClaseComponent implements OnInit{
       })
   }
 
+  asignarImagen(nombreClase: string): string {
+    switch (nombreClase) {
+      case 'Guerrero':
+        return 'assets/clases/guerrero.png';
+      case 'Artifice':
+        return 'assets/clases/artifice.png';
+      case 'Explorador':
+        return 'assets/clases/explorador.png';
+      case 'Bardo':
+        return 'assets/clases/bardo.png';
+      case 'Druida':
+        return 'assets/clases/druida.png';
+      case 'Pícaro':
+        return 'assets/clases/picaro.png';
+      case 'Paladín':
+        return 'assets/clases/paladin.png';
+      case 'Bárbaro':
+        return 'assets/clases/barbaro.png';
+      case 'Monje':
+        return 'assets/clases/monje.png';
+      case 'Mago':
+        return 'assets/clases/mago.png';
+      case 'Hechicero':
+        return 'assets/clases/hechicero.png';
+      case 'Brujo':
+        return 'assets/clases/brujo.png';
+      case 'Clérigo':
+        return 'assets/clases/clerigo.png';
+      default:
+        return 'assets/clases/dm.png';
+    }
+  }
+
 }

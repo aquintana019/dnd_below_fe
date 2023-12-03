@@ -22,6 +22,7 @@ import {
   of,
   switchMap,
 } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-crear-usuario',
@@ -31,53 +32,49 @@ import {
 export class CrearUsuarioComponent {
   formulario = this.fb.group(
     {
-      usuario: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      usuario: ['', [Validators.required]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.pattern(/^(?=.*[A-Z])(?=.*\d)/), 
+        ],
+      ]
     },
-    { updateOn: 'blur' }
+    { updateOn: 'change' }
   );
 
-  existeUsuario(control: AbstractControl): Observable<ValidationErrors | null> {
-    return of(control.value).pipe(
-      debounceTime(300),
-      switchMap((usuario) =>
-        this.apollo
-          .watchQuery({
-            query: GET_USUARIO,
-            variables: { user: usuario },
-          })
-          .valueChanges.pipe(
-            map((result: any) => {
-              const data = result.data;
-              const usuarioExiste = !!(data && data.comprobarUsuario);
-              console.log('usuarioExiste:', usuarioExiste);
+  mensajeError: string | null = null;
 
-              return usuarioExiste ? { usuarioExistente: true } : null;
-            })
-          )
-      )
-    );
+  constructor(private apollo: Apollo, private fb: FormBuilder, private router: Router, private cookieService: CookieService) {}
+
+  ngOnInit(): void {
+    this.cookieService.delete('misDatos');
   }
 
-  // getUsuario(): void {
-  //   this.apollo
-  //     .watchQuery({
-  //       query: GET_USUARIO,
-  //       variables: {
-  //         user: this.formulario.value.usuario,
-  //       },
-  //     })
-  //     .valueChanges.subscribe((data: any) => {
-  //       this.usuarioExiste = data.comprobarUsuario;
-  //     });
-  // }
+  existeUsuario(): boolean {
+    var usuarioExiste: boolean = false;
+    
+    this.apollo
+      .watchQuery({
+        query: GET_USUARIO,
+        variables: { user: this.formulario.value.usuario },
+      })
+      .valueChanges.subscribe((result: any) => {
+          const data = result.data;
+          usuarioExiste = !!(data && data.comprobarUsuario);
 
-  constructor(private apollo: Apollo, private fb: FormBuilder, private router: Router) {}
+          this.mensajeError = usuarioExiste ? 'El nombre de usuario ya existe.' : null;
+        })
+
+    return usuarioExiste;
+  }
 
   guardarDatos(): void {
     console.log('Formulario válido:', this.formulario.valid);
-
-    if (this.formulario.valid) {
+  
+    if (this.formulario.valid && !this.existeUsuario()) {
       this.apollo
         .mutate({
           mutation: CREAR_USUARIO,
@@ -87,11 +84,17 @@ export class CrearUsuarioComponent {
             esAdmin: 0,
           },
         })
-
         .subscribe(
           (response) => {
             console.log('Usuario creado exitosamente:', response);
-            this.router.navigate(['']);
+            if(!this.cookieService.get("misDatos")){
+              const DATOS_COOKIE= [this.formulario.value.usuario, this.formulario.value.password, 0 ];
+
+              this.cookieService.set('misDatos', JSON.stringify(DATOS_COOKIE), {secure: true, sameSite: 'None'});
+            }
+            this.router.navigate(['']).then(() => {
+              window.location.reload();
+            });;
           },
           (error) => {
             console.error('Error al crear usuario:', error);
@@ -100,3 +103,4 @@ export class CrearUsuarioComponent {
     }
   }
 }
+

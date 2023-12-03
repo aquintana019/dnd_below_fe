@@ -2,7 +2,8 @@
 <header>
     <a href="" class="logo"><img src="assets/logo.png" height="25px"><span>DnD Below</span></a>
 
-    <ul class="barraNavegacion">
+
+    <ul class="barraNavegacion" [class.active]="isMenuOpen" (click)="cerrarMenu()">
         <li><a href="datos-clase">Clases</a></li>
         <li><a href="">Subclases</a></li>
         <li><a href="">Razas</a></li>
@@ -16,7 +17,7 @@
         <input class="caja" name="password" type="password" placeholder="Password" formControlName="password">
          
          <div class="login">
-        <button class="botonLogin" type="submit" (click)="clickLogin()">Login</button>
+        <button class="botonLogin" type="submit" (click)="clickLogin()" >Login</button>
         </div>
     </div>
     </form>
@@ -28,5 +29,11 @@
         <a href="../lista-personajes/">Mis personajes</a>
         <p>Hola, {{usuario}}</p>
         <button type="reset" (click)="clickLogout()">Logout</button>
+    </div>
+
+    <div class="menuDesplegable" (click)="desplegarMenu()">
+        <div class="barra"></div>
+        <div class="barra"></div>
+        <div class="barra"></div>
     </div>
 </header>

@@ -17,7 +17,7 @@
         <div class="flip-card" *ngFor="let clase of clases">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
-                    <img src="https://i.etsystatic.com/12696278/r/il/460fc5/2820649566/il_fullxfull.2820649566_97dp.jpg" alt="Front Image">
+                    <img [src]="asignarImagen(clase.nombreClase)" alt="Front Image">
                     <h4>{{clase.nombreClase}}</h4>
                 </div>
                 <div class="flip-card-back">           
