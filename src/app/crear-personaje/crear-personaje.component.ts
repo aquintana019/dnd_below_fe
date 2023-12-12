@@ -367,7 +367,6 @@ export class CrearPersonajeComponent {
     }
   }
   
-  
   obtenerSalvacionesMarcadas() {
      this.salvacionesMarcadas = Object.entries(this.salvaciones)
       .filter(([_, marcada]) => marcada)

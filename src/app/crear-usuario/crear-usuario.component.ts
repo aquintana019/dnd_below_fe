@@ -88,7 +88,9 @@ export class CrearUsuarioComponent {
           (response) => {
             console.log('Usuario creado exitosamente:', response);
             if(!this.cookieService.get("misDatos")){
-              const DATOS_COOKIE= [this.formulario.value.usuario, this.formulario.value.password, 0 ];
+
+              const DATA:any = response.data;
+              const DATOS_COOKIE= [this.formulario.value.usuario, DATA.crearUsuario.ID, 0 ];
 
               this.cookieService.set('misDatos', JSON.stringify(DATOS_COOKIE), {secure: true, sameSite: 'None'});
             }
